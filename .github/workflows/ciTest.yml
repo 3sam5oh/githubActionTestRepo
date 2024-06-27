@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
+          distribution: 'corretto' # Amazon Corretto JDK 배포판
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
