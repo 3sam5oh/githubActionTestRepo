@@ -1,3 +1,7 @@
+### SETTING ###
+application.yml
+.idea/
+
 HELP.md
 .gradle
 build/
