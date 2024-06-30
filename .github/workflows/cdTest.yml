@@ -28,7 +28,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/openSearch-CICD-Test:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/open-search-cicd-test:latest
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
         with:
