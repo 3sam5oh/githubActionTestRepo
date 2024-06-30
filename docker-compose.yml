@@ -1,14 +1,15 @@
 version: '3.8'
 services:
   opensearch:
-    network_mode: "host"
-    image: opensearchproject/opensearch:2.8.0
+    image: opensearchproject/opensearch:2.15.0
     container_name: opensearch
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
-      - plugins.security.disabled=true
+#      - network.host=0.0.0.0
+      - plugins.security.disabled=false
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD} # 초기 비밀번호 설정
     ulimits:
       memlock:
         soft: -1
@@ -20,12 +21,15 @@ services:
       - 9600:9600
 
   opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:2.8.0
+    image: opensearchproject/opensearch-dashboards:2.15.0
     container_name: opensearch-dashboards
     ports:
       - 5601:5601
     environment:
       - OPENSEARCH_HOSTS=http://opensearch:9200
+      - OPENSEARCH_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD} # 관리자 비밀번호 추가
+      - 'OPENSEARCH_DASHBOARDS_SERVER_SSL_ENABLED=false'
+      - 'OPENSEARCH_DASHBOARDS_OPENSEARCH_REQUESTHEADERSWHITELIST=["Authorization"]'
 
   app:
     build: .

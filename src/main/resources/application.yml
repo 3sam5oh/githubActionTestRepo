@@ -1,6 +1,8 @@
 opensearch:
   host: localhost
   port: 9200
+  username: admin
+  password: TestOpenSearch@1234! # 강력한 비밀번호로 설정
 
 server:
   port: 8080
