@@ -1,3 +1,7 @@
+opensearch:
+  host: localhost
+  port: 9200
+
 server:
   port: 8080
   tomcat:
@@ -6,7 +10,7 @@ server:
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
+    driver-class-name: org.h2.Driver
     username: sa
     password:
   h2:
@@ -14,8 +18,14 @@ spring:
       enabled: true
   jpa:
     hibernate:
-      ddl-auto: create-drop  # ???? ???? ?????? ?? ? ??
+      ddl-auto: create-drop  # 스키마를 생성하고 애플리케이션 종료 시 삭제
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+
+logging:
+  level:
+    org.springframework: INFO
+    org.opensearch: INFO
+    githubActionTest: DEBUG

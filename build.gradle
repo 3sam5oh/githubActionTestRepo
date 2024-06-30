@@ -24,7 +24,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     compileOnly 'org.projectlombok:lombok'
@@ -34,6 +33,12 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     runtimeOnly 'com.h2database:h2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    /* OpenSearch 클라이언트 */
+    implementation 'org.opensearch.client:opensearch-rest-high-level-client:2.8.0'
+
+    /* CSV 라이브러리 (읽기 & 쓰기) */
+    implementation 'org.apache.commons:commons-csv:1.10.0'
 }
 
 tasks.named('test') {
