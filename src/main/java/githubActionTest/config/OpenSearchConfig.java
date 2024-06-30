@@ -14,16 +14,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OpenSearchConfig {
 
-    @Value("${spring.opensearch.host}")
+    @Value("${opensearch.host}")
     private String host;
 
-    @Value("${spring.opensearch.port}")
+    @Value("${opensearch.port}")
     private int port;
 
-    @Value("${spring.opensearch.username}")
+    @Value("${opensearch.username}")
     private String username;
 
-    @Value("${spring.opensearch.password}")
+    @Value("${opensearch.password}")
     private String password;
 
     @Bean

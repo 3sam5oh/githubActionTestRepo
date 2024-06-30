@@ -7,8 +7,8 @@ services:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
-#      - network.host=0.0.0.0
-      - plugins.security.disabled=false
+      - network.host=0.0.0.0
+      - plugins.security.disabled=false   # 여기를 해결해야함
       - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD} # 초기 비밀번호 설정
     ulimits:
       memlock:
