@@ -13,6 +13,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew clean build --info
+
+      - name: Verify JAR file exists
+        run: ls -l build/libs/*.jar
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -29,6 +44,7 @@ jobs:
           file: Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/open-search-cicd-test:latest
+
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -39,16 +55,16 @@ jobs:
 
       - name: Terraform Init
         run: docker run --rm \
-                -v ${{ github.workspace }}:/workspace \
-                -w /workspace \
-                -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
-                -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
-                hashicorp/terraform:1.9.0 init
+          -v ${{ github.workspace }}:/workspace \
+          -w /workspace \
+          -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+          -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+          hashicorp/terraform:1.9.0 init
 
       - name: Terraform Plan
         run: docker run --rm \
-                -v ${{ github.workspace }}:/workspace \
-                -w /workspace \
-                -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
-                -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
-                hashicorp/terraform:1.9.0 plan
+          -v ${{ github.workspace }}:/workspace \
+          -w /workspace \
+          -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+          -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+          hashicorp/terraform:1.9.0 plan
