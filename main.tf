@@ -47,11 +47,11 @@ provider "aws" {
 #   }
 # }
 
-resource "aws_instance" "example" {
-  ami           = "ami-00ff737803101edd1" # Amazon Linux 2023 AMI
-  instance_type = "t2.micro"
-
-  tags = {
-    Name = "terraform-example"
-  }
-}
+# resource "aws_instance" "example" {
+#   ami           = "ami-00ff737803101edd1" # Amazon Linux 2023 AMI
+#   instance_type = "t2.micro"
+#
+#   tags = {
+#     Name = "terraform-example"
+#   }
+# }
