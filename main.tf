@@ -48,7 +48,7 @@ provider "aws" {
 # }
 
 resource "aws_instance" "example" {
-  ami           = "ami-0c55b159cbfafe1f0" # Ubuntu 18.04 AMI (region-specific)
+  ami           = "ami-00ff737803101edd1" # Amazon Linux 2023 AMI
   instance_type = "t2.micro"
 
   tags = {
